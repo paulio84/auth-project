@@ -1,11 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
+    <SiteNav v-if="userLoggedIn" />
     <router-view />
   </div>
 </template>
+
+<script>
+import SiteNav from '@/components/SiteNav';
+
+export default {
+  name: 'App',
+  components: {
+    SiteNav
+  },
+  computed: {
+    userLoggedIn() {
+      return Object.keys(this.$store.state.userProfile).length > 0;
+    }
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
