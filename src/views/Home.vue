@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h1>Auth Vue</h1>
-  </div>
+  <h1>Auth Vue</h1>
 </template>
 
 <script>
