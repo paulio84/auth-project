@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <SiteNav v-if="userLoggedIn" />
+    <SiteNav />
     <router-view />
   </div>
 </template>
@@ -12,11 +12,6 @@ export default {
   name: 'App',
   components: {
     SiteNav
-  },
-  computed: {
-    userLoggedIn() {
-      return Object.keys(this.$store.state.userProfile).length > 0;
-    }
   }
 };
 </script>
@@ -30,16 +25,41 @@ export default {
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+a {
+  cursor: pointer;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.flex-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  max-width: 960px;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-control input {
+  outline: none;
+  padding: 8px;
+}
+
+.btn {
+  background-color: #41b883;
+  border: 1px solid #2c3e50;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
 }
 </style>
