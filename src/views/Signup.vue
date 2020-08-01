@@ -1,5 +1,8 @@
 <template>
-  <div id="signup">
+  <section id="signup" class="signup">
+    <p class="signup-title">
+      Sign up for your account
+    </p>
     <form class="form" @submit.prevent>
       <div class="form-control">
         <input
@@ -43,10 +46,12 @@
         <button class="btn" @click="signup">Sign up</button>
       </div>
     </form>
-    <div>
-      <span>Already have an account? <router-link to="/login">Log In</router-link></span>
+    <div class="links">
+      <span class="link">
+        Already have an account? <router-link to="/login">Log In</router-link>
+      </span>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -70,8 +75,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#signup {
+.signup {
+  background-color: rgba(0, 0, 0, 0);
   margin: 0 auto;
-  width: 50%;
+  text-align: center;
+  width: 320px;
+
+  @media (min-width: 705px) {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 3px;
+    box-shadow: 0 0 8px rgba(44, 62, 80, 0.3);
+    padding: 2em 2.5em;
+    width: 400px;
+  }
+}
+
+.links {
+  font-size: 1.4rem;
+  line-height: 2;
+  margin-top: 1rem;
+
+  & > .link {
+    display: block;
+  }
 }
 </style>

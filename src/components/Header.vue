@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header">
     <nav :class="{ 'flex-container': true, loggedIn: userLoggedIn }">
       <router-link to="/"><img src="../assets/logo.svg" alt="Auth Vue"/></router-link>
       <a @click="logout" v-if="userLoggedIn">logout</a>
@@ -11,7 +11,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'SiteNav',
+  name: 'Header',
   computed: {
     ...mapState(['userProfile']),
     userLoggedIn() {
@@ -27,6 +27,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header {
+  padding: 2em 0;
+}
+
 .loggedIn {
   justify-content: space-between;
 }

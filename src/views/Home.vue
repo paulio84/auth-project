@@ -1,5 +1,7 @@
 <template>
-  <h1>Auth Vue</h1>
+  <section id="home" class="container">
+    <h1>Home Page</h1>
+  </section>
 </template>
 
 <script>
