@@ -34,8 +34,21 @@ export default new Vuex.Store({
         console.dir(error);
       }
     },
-  mutations: {},
-  actions: {}
+    async login(context, formData) {
+      try {
+        const { user } = await auth.signInWithEmailAndPassword(formData.email, formData.password);
+
+        context.dispatch('fetchUserProfile', user);
+      } catch (error) {
+        console.dir(error);
+      }
+    },
+    async logout(context) {
+      await auth.signOut();
+
+      context.commit('SET_USER_PROFILE', {});
+      router.push('/login');
+    },
     async fetchUserProfile(context, user) {
       const userProfile = await usersCollection.doc(user.uid).get();
 
