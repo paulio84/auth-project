@@ -13,9 +13,9 @@ import { mapState } from 'vuex';
 export default {
   name: 'Header',
   computed: {
-    ...mapState(['userProfile']),
+    ...mapState(['auth']),
     userLoggedIn() {
-      return Object.keys(this.userProfile).length > 0;
+      return Object.keys(this.auth.userProfile).length > 0;
     }
   },
   methods: {

@@ -3,6 +3,7 @@
     <p class="signup-title">
       Sign up for your account
     </p>
+    <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
     <form class="form" @submit.prevent>
       <div class="form-control">
         <input
@@ -48,11 +49,18 @@
 
 <script>
 import PasswordField from '@/components/PasswordField';
+import { mapState } from 'vuex';
 
 export default {
   name: 'SignUp',
   components: {
     'password-field': PasswordField
+  },
+  computed: {
+    ...mapState(['auth']),
+    errorMessage() {
+      return this.auth.error.message;
+    }
   },
   data() {
     return {
@@ -75,6 +83,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.error-message {
+  background: #b84141;
+  border-radius: 3px;
+  color: white;
+  margin-top: 2rem;
+  padding: 1em;
+}
+
 .signup {
   background-color: rgba(0, 0, 0, 0);
   margin: 0 auto;
