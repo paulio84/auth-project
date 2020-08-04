@@ -33,15 +33,7 @@
           v-model="location"
         />
       </div>
-      <div class="form-control">
-        <input
-          id="password"
-          type="password"
-          placeholder="Enter password"
-          required
-          v-model="password"
-        />
-      </div>
+      <password-field @updatePassword="updatePassword"></password-field>
       <div class="form-control">
         <button class="btn" @click="signup">Sign up</button>
       </div>
@@ -55,8 +47,13 @@
 </template>
 
 <script>
+import PasswordField from '@/components/PasswordField';
+
 export default {
   name: 'SignUp',
+  components: {
+    'password-field': PasswordField
+  },
   data() {
     return {
       fullname: '',
@@ -69,6 +66,9 @@ export default {
     signup() {
       const { fullname, location, email, password } = this;
       this.$store.dispatch('signup', { fullname, location, email, password });
+    },
+    updatePassword(newPassword) {
+      this.password = newPassword;
     }
   }
 };

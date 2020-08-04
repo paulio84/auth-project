@@ -14,15 +14,7 @@
           v-model="email"
         />
       </div>
-      <div class="form-control">
-        <input
-          id="password"
-          type="password"
-          placeholder="Enter password"
-          required
-          v-model="password"
-        />
-      </div>
+      <password-field @updatePassword="updatePassword"></password-field>
       <div class="form-control">
         <button class="btn" @click="login">Log in</button>
       </div>
@@ -37,8 +29,13 @@
 </template>
 
 <script>
+import PasswordField from '@/components/PasswordField';
+
 export default {
   name: 'Login',
+  components: {
+    'password-field': PasswordField
+  },
   data() {
     return {
       email: '',
@@ -49,6 +46,9 @@ export default {
     login() {
       const { email, password } = this;
       this.$store.dispatch('login', { email, password });
+    },
+    updatePassword(newPassword) {
+      this.password = newPassword;
     }
   }
 };
