@@ -85,8 +85,6 @@ a {
 }
 
 .form-control {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 2rem;
 }
 
@@ -96,6 +94,7 @@ a {
   border-radius: 3px;
   outline: none;
   padding: 0.5em;
+  width: 100%;
 }
 
 .btn {
