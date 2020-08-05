@@ -30,35 +30,17 @@
 </template>
 
 <script>
-import PasswordField from '@/components/PasswordField';
-import { mapState } from 'vuex';
+import { authMixin } from '@/shared/mixins';
 
 export default {
   name: 'Login',
-  components: {
-    'password-field': PasswordField
-  },
-  computed: {
-    ...mapState(['auth']),
-    errorMessage() {
-      return this.auth.error.message;
-    }
-  },
-  data() {
-    return {
-      email: '',
-      password: ''
-    };
-  },
   methods: {
     login() {
       const { email, password } = this;
       this.$store.dispatch('login', { email, password });
-    },
-    updatePassword(newPassword) {
-      this.password = newPassword;
     }
-  }
+  },
+  mixins: [authMixin]
 };
 </script>
 
