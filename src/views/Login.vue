@@ -31,13 +31,15 @@
 
 <script>
 import { authMixin } from '@/shared/mixins';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Login',
   methods: {
-    login() {
+    ...mapActions(['loginAction']),
+    async login() {
       const { email, password } = this;
-      this.$store.dispatch('login', { email, password });
+      await this.loginAction({ email, password });
     }
   },
   mixins: [authMixin]

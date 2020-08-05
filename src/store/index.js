@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { auth, usersCollection } from '../config/firebase';
 import router from '../router';
+import { SET_USER_PROFILE } from './mutation-types';
 
 Vue.use(Vuex);
 
@@ -13,12 +14,12 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SET_USER_PROFILE(state, payload) {
+    [SET_USER_PROFILE](state, payload) {
       state.auth = payload;
     }
   },
   actions: {
-    async signup(context, formData) {
+    async signupAction({ commit, dispatch }, formData) {
       try {
         const { user } = await auth.createUserWithEmailAndPassword(
           formData.email,
@@ -32,7 +33,7 @@ export default new Vuex.Store({
           displayName: formData.fullname
         });
 
-        context.dispatch('fetchUserProfile', user);
+        dispatch('fetchUserProfileAction', user);
       } catch (error) {
         const errorMessage = { message: error.message };
         if (error.code === 'auth/invalid-email') {
@@ -41,34 +42,34 @@ export default new Vuex.Store({
           errorMessage.message = 'This email address is already in use.';
         }
 
-        context.commit('SET_USER_PROFILE', {
+        commit(SET_USER_PROFILE, {
           userProfile: {},
           error: errorMessage
         });
       }
     },
-    async login(context, formData) {
+    async loginAction({ commit, dispatch }, formData) {
       try {
         const { user } = await auth.signInWithEmailAndPassword(formData.email, formData.password);
 
-        context.dispatch('fetchUserProfile', user);
+        dispatch('fetchUserProfileAction', user);
       } catch (error) {
-        context.commit('SET_USER_PROFILE', {
+        commit(SET_USER_PROFILE, {
           userProfile: {},
           error: { message: 'Incorrect email address and/or password.' }
         });
       }
     },
-    async logout(context) {
+    async logoutAction({ commit }) {
       await auth.signOut();
 
-      context.commit('SET_USER_PROFILE', { userProfile: {}, error: {} });
+      commit(SET_USER_PROFILE, { userProfile: {}, error: {} });
       router.push('/login');
     },
-    async fetchUserProfile(context, user) {
+    async fetchUserProfileAction({ commit }, user) {
       const userProfile = await usersCollection.doc(user.uid).get();
 
-      context.commit('SET_USER_PROFILE', { userProfile: userProfile.data(), error: {} });
+      commit(SET_USER_PROFILE, { userProfile: userProfile.data(), error: {} });
 
       if (router.currentRoute.path === '/login' || router.currentRoute.path === '/signup') {
         router.push('/');

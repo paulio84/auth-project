@@ -8,19 +8,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Header',
   computed: {
-    ...mapState(['auth']),
+    // ...mapState({ auth: (state) => state.auth });
+    // ...mapState({ auth: 'auth' });
+    ...mapState(['auth']), // three ways to do the same thing
     userLoggedIn() {
       return Object.keys(this.auth.userProfile).length > 0;
     }
   },
   methods: {
+    ...mapActions(['logoutAction']),
     logout() {
-      this.$store.dispatch('logout');
+      this.logoutAction();
     }
   }
 };

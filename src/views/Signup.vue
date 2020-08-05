@@ -49,6 +49,7 @@
 
 <script>
 import { authMixin } from '@/shared/mixins';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'SignUp',
@@ -59,9 +60,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['signupAction']),
     signup() {
       const { fullname, location, email, password } = this;
-      this.$store.dispatch('signup', { fullname, location, email, password });
+      this.signupAction({ fullname, location, email, password });
     }
   },
   mixins: [authMixin]
