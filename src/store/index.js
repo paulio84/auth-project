@@ -7,6 +7,7 @@ import { SET_USER_PROFILE } from './mutation-types';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  strict: process.env.NODE_ENV !== 'production',
   state: {
     auth: {
       userProfile: {},
