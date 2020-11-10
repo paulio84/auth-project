@@ -6,7 +6,7 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <Header className="py-4" />
       <div>Hello World</div>
     </>
   );
