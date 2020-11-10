@@ -1,3 +1,12 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
+const colorTheme = {
+  react: { blue: '#00DBFC' },
+  redux: { purple: '#764abc' },
+  dark: '#292929',
+  pale: '#e7efff'
+};
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -7,7 +16,13 @@ module.exports = {
   },
   purge: ['src/**/*.{js,ts,jsx,tsx}', 'public/**/*.html'],
   theme: {
-    extend: {}
+    colors: colorTheme,
+    extend: {
+      fontFamily: {
+        sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
+        asap: ['Asap', 'sans-serif']
+      }
+    }
   },
   variants: {},
   plugins: []

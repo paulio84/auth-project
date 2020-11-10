@@ -1,3 +1,24 @@
 @tailwind base;
+
+@layer base {
+  @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans Regular'), local('OpenSans-Regular'),
+      url('../assets/fonts/open-sans-v18-latin-regular.woff2') format('woff2'),
+      url('../assets/fonts/open-sans-v18-latin-regular.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Asap';
+    font-style: italic;
+    font-weight: 600;
+    src: local('Asap SemiBold Italic'), local('Asap-SemiBoldItalic'),
+      url('../assets/fonts/asap-v13-latin-600italic.woff2') format('woff2'),
+      url('../assets/fonts/asap-v13-latin-600italic.woff') format('woff');
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
