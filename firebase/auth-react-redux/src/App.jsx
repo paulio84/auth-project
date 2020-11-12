@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useApplyCSSClass } from './hooks';
 import Layout from './components/Layout';
-import { Home, Login, Register, NotFound } from './components/pages';
+import { Home, LogIn, Register, NotFound } from './components/pages';
 
 const App = () => {
   useApplyCSSClass('body', ['h-screen', 'text-dark']);
@@ -14,7 +14,7 @@ const App = () => {
             <Home />
           </Route>
           <Route path="/login">
-            <Login />
+            <LogIn />
           </Route>
           <Route path="/register">
             <Register />

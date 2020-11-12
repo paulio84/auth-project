@@ -1,6 +1,6 @@
 import Home from './Home';
-import Login from './Login';
+import LogIn from './LogIn';
 import Register from './Register';
 import NotFound from './NotFound';
 
-export { Home, Login, Register, NotFound };
+export { Home, LogIn, Register, NotFound };
