@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useBodyClass } from './hooks';
+import { useApplyCSSClass } from './hooks';
 import Layout from './components/Layout';
 import { Home, Login, Register, NotFound } from './components/pages';
 
 const App = () => {
-  useBodyClass('bg-pale');
+  useApplyCSSClass('body', ['h-screen', 'text-dark']);
 
   return (
     <BrowserRouter>

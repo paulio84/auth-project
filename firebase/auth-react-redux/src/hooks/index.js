@@ -1,3 +1,3 @@
-import useBodyClass from './useBodyClass';
+import useApplyCSSClass from './useApplyCSSClass';
 
-export { useBodyClass };
+export { useApplyCSSClass };
