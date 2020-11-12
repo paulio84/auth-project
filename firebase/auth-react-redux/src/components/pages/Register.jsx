@@ -8,9 +8,9 @@ const Register = () => {
   return (
     <>
       <div className="flex justify-center">
-        <div className="bg-white max-w-xs md:max-w-sm pt-6 md:p-6 md:rounded md:shadow">
+        <div className="bg-white pt-10 md:p-10 md:rounded md:shadow">
           <h1 className="text-center">Sign up for your account</h1>
-          <form className="mt-12 space-y-5 pb-4 border-b border-dark mb-4">
+          <form className="mt-12 space-y-5 pb-4 border-b border-dark mb-4 w-80">
             <input
               className="w-full border rounded-sm p-2 outline-none"
               type="email"
@@ -34,13 +34,13 @@ const Register = () => {
             <PasswordField className="w-full border rounded-sm p-2" />
             <button className="w-full border rounded-sm bg-react-blue p-2">Register</button>
           </form>
-          <div className="text-center">
-            <span className="text-sm">
+          <div className="text-center text-sm">
+            <div>
               Already have an account?{' '}
               <Link to="/login" className="underline">
                 Log In
               </Link>
-            </span>
+            </div>
           </div>
         </div>
       </div>

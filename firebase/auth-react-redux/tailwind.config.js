@@ -27,6 +27,10 @@ module.exports = {
       fontFamily: {
         sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
         asap: ['Asap', 'sans-serif']
+      },
+      spacing: {
+        72: '18rem',
+        80: '20rem'
       }
     }
   },
