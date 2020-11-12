@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useBodyClass } from './hooks';
-import Header from './components/Header';
+import Layout from './components/Layout';
 import { Home, Login, Register, NotFound } from './components/pages';
 
 const App = () => {
@@ -8,21 +8,22 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Header className="py-4" />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </Layout>
     </BrowserRouter>
   );
 };
