@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useBodyClass } from './hooks';
 import Header from './components/Header';
-import Home from './components/pages/Home';
+import { Home, Login, Register, NotFound } from './components/pages';
 
 const App = () => {
   useBodyClass('bg-pale');
@@ -13,9 +13,15 @@ const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/login">{/* <Login /> */}</Route>
-        <Route path="/register">{/* <Register /> */}</Route>
-        <Route path="*">{/* <NotFound /> */}</Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="*">
+          <NotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
