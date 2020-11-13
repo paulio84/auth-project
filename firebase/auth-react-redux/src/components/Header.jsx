@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import Icon from './Icon';
+import ReactIcon from './ReactIcon';
 
 const Header = ({ className }) => (
   <header className={className}>
     <Link to="/" className="flex items-center justify-center">
-      <Icon />
+      <ReactIcon className="mr-2" />
       <h1 className="font-asap text-2xl">Auth React-Redux</h1>
     </Link>
   </header>
