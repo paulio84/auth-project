@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import InputField from './InputField';
 import hidePasswordIcon from '../assets/hide-password.svg';
 import showPasswordIcon from '../assets/show-password.svg';
 
-const PasswordField = ({ className }) => {
+const PasswordField = ({ className, name, value, handleChange }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleOnClick = () => {
@@ -10,13 +11,15 @@ const PasswordField = ({ className }) => {
   };
 
   return (
-    <div className={`flex ${className}`}>
-      <input
-        className="flex-grow outline-none mr-2"
+    <div className={`flex w-full border rounded-sm pr-2`}>
+      <InputField
+        name={name}
+        value={value}
+        handleChange={handleChange}
+        className="flex-grow border-none"
         type={showPassword ? 'text' : 'password'}
         placeholder="Enter password"
-        autoComplete="off"
-        required
+        isRequired
       />
       <img
         className="cursor-pointer"

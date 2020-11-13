@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import InputField from '../InputField';
 import PasswordField from '../PasswordField';
-import { useApplyCSSClass } from '../../hooks';
+import { useApplyCSSClass, useAuthForm } from '../../hooks';
 
 const Register = () => {
+  const authForm = useAuthForm({ email: '', fullname: '', location: '', password: '' });
   useApplyCSSClass('#root', ['h-full', 'md:bg-pale']);
 
   return (
@@ -11,27 +13,32 @@ const Register = () => {
         <div className="bg-white pt-10 md:p-10 md:rounded md:shadow">
           <h1 className="text-center">Sign up for your account</h1>
           <form className="mt-12 space-y-5 pb-4 border-b border-dark mb-4 w-80">
-            <input
-              className="w-full border rounded-sm p-2 outline-none"
+            <InputField
+              name="email"
               type="email"
+              value={authForm.email}
+              handleChange={authForm.handleChange}
               placeholder="Enter email"
-              autoComplete="off"
-              required
+              isRequired
             />
-            <input
-              className="w-full border rounded-sm p-2 outline-none"
-              type="text"
+            <InputField
+              name="fullname"
+              value={authForm.fullname}
+              handleChange={authForm.handleChange}
               placeholder="Enter full name"
-              autoComplete="off"
-              required
+              isRequired
             />
-            <input
-              className="w-full border rounded-sm p-2 outline-none"
-              type="text"
+            <InputField
+              name="location"
+              value={authForm.location}
+              handleChange={authForm.handleChange}
               placeholder="Enter location"
-              autoComplete="off"
             />
-            <PasswordField className="w-full border rounded-sm p-2" />
+            <PasswordField
+              name="password"
+              value={authForm.password}
+              handleChange={authForm.handleChange}
+            />
             <button className="w-full border rounded-sm bg-react-blue p-2">Register</button>
           </form>
           <div className="text-center text-sm">
