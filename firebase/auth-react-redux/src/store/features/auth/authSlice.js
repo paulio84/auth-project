@@ -15,6 +15,9 @@ const authSlice = createSlice({
     },
     register(state, action) {
       console.log('REGISTER');
+    },
+    fetchUserProfile(state, action) {
+      console.log('FETCH_USER_PROFILE');
     }
   }
 });

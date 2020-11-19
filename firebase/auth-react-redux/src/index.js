@@ -19,8 +19,8 @@ auth.onAuthStateChanged((user) => {
       document.getElementById('root')
     );
 
-    // if (user) {
-    //   store.dispatch('fetchUserProfile', user);
-    // }
+    if (user) {
+      store.dispatch({ type: 'auth/fetchUserProfile', payload: user });
+    }
   }
 });
