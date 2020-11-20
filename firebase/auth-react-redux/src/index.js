@@ -8,20 +8,19 @@ import './styles/tailwind.output.css';
 
 import App from './App';
 
-let app;
 auth.onAuthStateChanged((user) => {
-  if (!app) {
-    ReactDOM.render(
-      <React.StrictMode>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </React.StrictMode>,
-      document.getElementById('root')
-    );
+  console.log('ON_AUTH_STATE_CHANGED', user);
+  ReactDOM.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
 
-    if (user) {
-      store.dispatch(fetchUserProfile(user));
-    }
+  if (user) {
+    store.dispatch(fetchUserProfile(user.uid));
+    // TODO: CAN THIS BE CANCELLED IF THE USER IS ALREADY LOADED
   }
 });
