@@ -1,4 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const registerNewUser = createAsyncThunk('auth/register', async (newUser) => {
+  console.log('REGISTER_NEW_USER/THUNK', newUser);
+});
+
+export const login = createAsyncThunk('auth/login', async (credentials) => {
+  console.log('LOGIN/THUNK', credentials);
+});
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  console.log('LOGOUT/THUNK');
+});
+
+export const fetchUserProfile = createAsyncThunk('auth/fetchUserProfile', async (user) => {
+  console.log('FETCH_USER_PROFILE/THUNK', user);
+});
 
 const authSlice = createSlice({
   name: 'auth',
@@ -6,22 +22,21 @@ const authSlice = createSlice({
     user: {},
     error: null
   },
-  reducers: {
-    login(state, action) {
-      console.log('LOGIN');
+  reducers: {},
+  extraReducers: {
+    [registerNewUser.fulfilled]: (state, action) => {
+      console.log('EXTRA - REGISTER');
     },
-    logout(state, action) {
-      console.log('LOGOUT');
+    [login.fulfilled]: (state, action) => {
+      console.log('EXTRA - LOGIN');
     },
-    register(state, action) {
-      console.log('REGISTER');
+    [logout.fulfilled]: (state, action) => {
+      console.log('EXTRA - LOGOUT');
     },
-    fetchUserProfile(state, action) {
+    [fetchUserProfile.fulfilled]: (state, action) => {
       console.log('FETCH_USER_PROFILE');
     }
   }
 });
-
-export const { login, logout, register } = authSlice.actions;
 
 export default authSlice.reducer;

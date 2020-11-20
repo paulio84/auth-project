@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import InputField from '../InputField';
 import PasswordField from '../PasswordField';
 import { useApplyCSSClass, useAuthForm } from '../../hooks';
-import { register } from '../../store/features/auth/authSlice';
+import { registerNewUser } from '../../store/features/auth/authSlice';
 
 const Register = () => {
   const { authForm, handleChange } = useAuthForm({
@@ -17,7 +17,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(register(authForm));
+    dispatch(registerNewUser(authForm));
   };
 
   return (

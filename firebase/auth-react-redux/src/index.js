@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
+import { fetchUserProfile } from './store/features/auth/authSlice';
 import { auth } from './config/firebase';
 import './styles/tailwind.output.css';
 
@@ -20,7 +21,7 @@ auth.onAuthStateChanged((user) => {
     );
 
     if (user) {
-      store.dispatch({ type: 'auth/fetchUserProfile', payload: user });
+      store.dispatch(fetchUserProfile(user));
     }
   }
 });
