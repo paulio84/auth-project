@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useApplyCSSClass } from './hooks';
 import Layout from './components/Layout';
 import { Home, LogIn, Register, NotFound } from './components/pages';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   useApplyCSSClass('body', ['h-screen', 'text-dark']);
@@ -10,9 +11,9 @@ const App = () => {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path="/">
+          <PrivateRoute exact path="/">
             <Home />
-          </Route>
+          </PrivateRoute>
           <Route path="/login">
             <LogIn />
           </Route>
