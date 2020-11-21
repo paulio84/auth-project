@@ -14,6 +14,7 @@ export const registerNewUser = createAsyncThunk('auth/register', async (newUser)
 
 export const login = createAsyncThunk('auth/login', async (credentials) => {
   console.log('AUTH/LOGIN', credentials);
+  await auth.signInWithEmailAndPassword(credentials.email, credentials.password);
 });
 
 export const logout = createAsyncThunk('auth/logout', async () => {
@@ -42,15 +43,26 @@ const authSlice = createSlice({
     [registerNewUser.rejected]: (state, action) => {
       console.log('AUTH/REGISTER_NEW_USER/REJECTED', action);
       state.user = {};
+      action.error.code = process.env.NODE_ENV === 'production' ? '' : action.error.code;
       state.error = action.error;
     },
-    [login.fulfilled]: (state, action) => {
-      console.log('AUTH/LOGIN/FULFILLED', action.payload);
+    [login.rejected]: (state, action) => {
+      console.log('AUTH/LOGIN/REJECTED', action);
+      state.user = {};
+      action.error.message = 'The email address and password are invalid.';
+      action.error.code = process.env.NODE_ENV === 'production' ? '' : action.error.code;
+      state.error = action.error;
     },
     [logout.fulfilled]: (state, action) => {
       console.log('AUTH/LOGOUT/FULFILLED', action.payload);
       state.user = {};
       state.error = {};
+    },
+    [fetchUserProfile.rejected]: (state, action) => {
+      console.log('AUTH/FETCH_USER_PROFILE/REJECTED', action);
+      state.user = {};
+      action.error.code = process.env.NODE_ENV === 'production' ? '' : action.error.code;
+      state.error = action.error;
     },
     [fetchUserProfile.fulfilled]: (state, action) => {
       console.log('AUTH/FETCH_USER_PROFILE/FULFILLED', action.payload);
