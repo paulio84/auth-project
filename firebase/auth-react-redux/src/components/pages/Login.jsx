@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import InputField from '../InputField';
 import PasswordField from '../PasswordField';
 import { useApplyCSSClass, useAuth, useAuthForm } from '../../hooks';
-import { login } from '../../store/features/auth/authSlice';
+import { login, clearAuthErrors } from '../../store/features/auth/authSlice';
 
 const LogIn = () => {
   const { authForm, handleChange } = useAuthForm({ email: '', password: '' });
@@ -15,6 +16,12 @@ const LogIn = () => {
     e.preventDefault();
     dispatch(login(authForm));
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearAuthErrors());
+    };
+  }, [dispatch]);
 
   if (isAuthenticated) {
     return <Redirect to="/" />;

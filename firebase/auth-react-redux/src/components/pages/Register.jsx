@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import InputField from '../InputField';
 import PasswordField from '../PasswordField';
 import { useApplyCSSClass, useAuth, useAuthForm } from '../../hooks';
-import { registerNewUser } from '../../store/features/auth/authSlice';
+import { registerNewUser, clearAuthErrors } from '../../store/features/auth/authSlice';
+import { useEffect } from 'react';
 
 const Register = () => {
   const { authForm, handleChange } = useAuthForm({
@@ -20,6 +21,12 @@ const Register = () => {
     e.preventDefault();
     dispatch(registerNewUser(authForm));
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearAuthErrors());
+    };
+  }, [dispatch]);
 
   // check if there is a logged in user - if so redirect
   if (isAuthenticated) {

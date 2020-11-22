@@ -23,15 +23,15 @@ export const fetchUserProfile = createAsyncThunk(
   'auth/fetchUserProfile',
   async (userId, { rejectWithValue }) => {
     try {
-    const userProfile = await usersCollection.doc(userId).get({ source: 'server' });
-    if (!userProfile.data()) {
+      const userProfile = await usersCollection.doc(userId).get({ source: 'server' });
+      if (!userProfile.data()) {
         throw new Error('User profile cannot be found.');
-    }
+      }
 
-    return { userProfile: userProfile.data() };
+      return { userProfile: userProfile.data() };
     } catch (error) {
       return rejectWithValue({ message: error.message });
-  }
+    }
   }
 );
 
@@ -44,7 +44,11 @@ const authSlice = createSlice({
     },
     error: {}
   },
-  reducers: {},
+  reducers: {
+    clearAuthErrors: (state, action) => {
+      state.error = {};
+    }
+  },
   extraReducers: {
     [registerNewUser.rejected]: (state, action) => {
       const user = { isAuthenticated: false, profile: { error: null } };
@@ -89,5 +93,7 @@ const authSlice = createSlice({
     }
   }
 });
+
+export const { clearAuthErrors } = authSlice.actions;
 
 export default authSlice.reducer;
