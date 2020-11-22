@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks';
 import { logout } from '../store/features/auth/authSlice';
 import ReactIcon from './ReactIcon';
 
 const Header = ({ className }) => {
-  const { user } = useSelector((state) => state.auth);
-  const isAuthenticated = Object.keys(user).length > 0;
+  const { isAuthenticated } = useAuth();
   const dispatch = useDispatch();
 
   return (
