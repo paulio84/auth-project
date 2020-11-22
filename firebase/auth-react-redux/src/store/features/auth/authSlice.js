@@ -22,12 +22,16 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 export const fetchUserProfile = createAsyncThunk(
   'auth/fetchUserProfile',
   async (userId, { rejectWithValue }) => {
+    try {
     const userProfile = await usersCollection.doc(userId).get({ source: 'server' });
     if (!userProfile.data()) {
-      return rejectWithValue({ message: 'User profile cannot be found' });
+        throw new Error('User profile cannot be found.');
     }
 
     return { userProfile: userProfile.data() };
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
+  }
   }
 );
 
