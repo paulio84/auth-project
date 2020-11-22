@@ -1,8 +1,8 @@
 import { Link, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import InputField from '../InputField';
 import PasswordField from '../PasswordField';
-import { useApplyCSSClass, useAuthForm } from '../../hooks';
+import { useApplyCSSClass, useAuth, useAuthForm } from '../../hooks';
 import { registerNewUser } from '../../store/features/auth/authSlice';
 
 const Register = () => {
@@ -14,7 +14,7 @@ const Register = () => {
   });
   useApplyCSSClass('#root', ['h-full', 'md:bg-pale']);
 
-  const { user, error } = useSelector((state) => state.auth);
+  const { isAuthenticated, error } = useAuth();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const Register = () => {
   };
 
   // check if there is a logged in user - if so redirect
-  if (user && Object.keys(user).length > 0) {
+  if (isAuthenticated) {
     return <Redirect to="/" />;
   }
 
