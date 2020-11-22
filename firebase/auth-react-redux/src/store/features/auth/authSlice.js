@@ -19,47 +19,68 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   await auth.signOut();
 });
 
-export const fetchUserProfile = createAsyncThunk('auth/fetchUserProfile', async (userId) => {
-  const userProfile = await usersCollection.doc(userId).get({ source: 'server' });
-  return { userProfile: userProfile.data() };
-  // console.log(userProfile.data());
-  // if (!userProfile.data()) {
-  //   console.log('REJECT');
-  //   return rejectWithValue({ error: { message: 'User profile cannot be found' } });
-  // }
-});
+export const fetchUserProfile = createAsyncThunk(
+  'auth/fetchUserProfile',
+  async (userId, { rejectWithValue }) => {
+    const userProfile = await usersCollection.doc(userId).get({ source: 'server' });
+    if (!userProfile.data()) {
+      return rejectWithValue({ message: 'User profile cannot be found' });
+    }
+
+    return { userProfile: userProfile.data() };
+  }
+);
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: {},
+    user: {
+      isAuthenticated: false,
+      profile: { error: null }
+    },
     error: {}
   },
   reducers: {},
   extraReducers: {
     [registerNewUser.rejected]: (state, action) => {
-      state.user = {};
+      const user = { isAuthenticated: false, profile: { error: null } };
+      state.user = user;
       action.error.code = process.env.NODE_ENV === 'production' ? '' : action.error.code;
       state.error = action.error;
     },
+    [registerNewUser.fulfilled]: (state, action) => {
+      const user = { ...state.user, isAuthenticated: true };
+      state.user = user;
+      state.error = {};
+    },
     [login.rejected]: (state, action) => {
-      state.user = {};
+      const user = { isAuthenticated: false, profile: { error: null } };
+      state.user = user;
       action.error.message = 'The email address and password are invalid.';
       action.error.code = process.env.NODE_ENV === 'production' ? '' : action.error.code;
       state.error = action.error;
     },
+    [login.fulfilled]: (state, action) => {
+      const user = { ...state.user, isAuthenticated: true };
+      state.user = user;
+      state.error = {};
+    },
     [logout.fulfilled]: (state, action) => {
-      state.user = {};
+      const user = { isAuthenticated: false, profile: { error: null } };
+      state.user = user;
       state.error = {};
     },
     [fetchUserProfile.rejected]: (state, action) => {
-      console.log(action);
-      state.user = {};
-      action.error.code = process.env.NODE_ENV === 'production' ? '' : action.error.code;
-      state.error = action.error;
+      const user = { ...state.user, profile: { error: action.payload.message } };
+      state.user = user;
+      state.error = {};
     },
     [fetchUserProfile.fulfilled]: (state, action) => {
-      state.user = action.payload.userProfile;
+      const user = {
+        ...state.user,
+        profile: { ...action.payload.userProfile, error: null }
+      };
+      state.user = user;
       state.error = {};
     }
   }
