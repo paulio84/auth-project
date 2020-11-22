@@ -9,8 +9,6 @@ import './styles/tailwind.output.css';
 import App from './App';
 
 auth.onAuthStateChanged(async (user) => {
-  console.log('ON_AUTH_STATE_CHANGED', user);
-
   if (user) {
     await store.dispatch(fetchUserProfile(user.uid));
   }
