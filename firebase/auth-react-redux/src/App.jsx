@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import { useApplyCSSClass } from './hooks';
 import Layout from './components/Layout';
-import { Home, LogIn, Register, NotFound } from './components/pages';
+import { Home, LogIn, Register, NotFound, ForgotPassword } from './components/pages';
 import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
@@ -18,6 +18,9 @@ const App = () => {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/forgotpassword">
+          <ForgotPassword />
         </Route>
         <Route path="*">
           <NotFound />

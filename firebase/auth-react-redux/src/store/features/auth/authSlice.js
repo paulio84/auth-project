@@ -35,6 +35,10 @@ export const fetchUserProfile = createAsyncThunk(
   }
 );
 
+export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (credentials) => {
+  await auth.sendPasswordResetEmail(credentials.email);
+});
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
