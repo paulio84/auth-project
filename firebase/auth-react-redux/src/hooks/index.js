@@ -1,5 +1,5 @@
 import useApplyCSSClass from './useApplyCSSClass';
 import useAuthForm from './useAuthForm';
-import useAuth from './useAuth';
+import useAuthStore from './useAuthStore';
 
-export { useApplyCSSClass, useAuthForm, useAuth };
+export { useApplyCSSClass, useAuthForm, useAuthStore };

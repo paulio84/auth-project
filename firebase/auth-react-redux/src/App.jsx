@@ -1,8 +1,9 @@
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { useApplyCSSClass } from './hooks';
 import Layout from './components/Layout';
 import { Home, LogIn, Register, NotFound, ForgotPassword } from './components/pages';
 import PrivateRoute from './components/PrivateRoute';
+import ExtendedRoute from './components/ExtendedRoute';
 
 const App = () => {
   useApplyCSSClass('body', ['h-screen', 'text-dark']);
@@ -13,18 +14,18 @@ const App = () => {
         <PrivateRoute exact path="/">
           <Home />
         </PrivateRoute>
-        <Route path="/login">
+        <ExtendedRoute path="/login">
           <LogIn />
-        </Route>
-        <Route path="/register">
+        </ExtendedRoute>
+        <ExtendedRoute path="/register">
           <Register />
-        </Route>
-        <Route path="/forgotpassword">
+        </ExtendedRoute>
+        <ExtendedRoute path="/forgotpassword">
           <ForgotPassword />
-        </Route>
-        <Route path="*">
+        </ExtendedRoute>
+        <ExtendedRoute path="*">
           <NotFound />
-        </Route>
+        </ExtendedRoute>
       </Switch>
     </Layout>
   );

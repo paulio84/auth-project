@@ -1,17 +1,15 @@
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import InputField from '../InputField';
 import PasswordField from '../PasswordField';
-import { useApplyCSSClass, useAuth, useAuthForm } from '../../hooks';
+import { useApplyCSSClass, useAuthForm } from '../../hooks';
 import { login } from '../../store/features/auth/authSlice';
 
 const LogIn = () => {
-  const { authForm, handleChange, handleSubmit } = useAuthForm({ email: '', password: '' }, login);
+  const { authForm, handleChange, handleSubmit, error } = useAuthForm(
+    { email: '', password: '' },
+    login
+  );
   useApplyCSSClass('#root', ['h-full', 'md:bg-pale']);
-
-  const { isAuthenticated, error } = useAuth();
-  if (isAuthenticated) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <>

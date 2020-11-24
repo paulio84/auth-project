@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { clearAuthErrors } from '../store/features/auth/authSlice';
+import { useAuthStore } from '../hooks';
 
 const useAuthForm = (authFields, action) => {
   const [authForm, setAuthForm] = useState(authFields);
   const dispatch = useDispatch();
+  const { error } = useAuthStore();
 
   useEffect(() => {
     return () => {
@@ -24,7 +26,8 @@ const useAuthForm = (authFields, action) => {
   return {
     authForm,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    error
   };
 };
 

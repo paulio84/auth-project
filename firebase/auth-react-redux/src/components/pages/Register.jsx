@@ -1,11 +1,11 @@
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import InputField from '../InputField';
 import PasswordField from '../PasswordField';
-import { useApplyCSSClass, useAuth, useAuthForm } from '../../hooks';
+import { useApplyCSSClass, useAuthForm } from '../../hooks';
 import { registerNewUser } from '../../store/features/auth/authSlice';
 
 const Register = () => {
-  const { authForm, handleChange, handleSubmit } = useAuthForm(
+  const { authForm, handleChange, handleSubmit, error } = useAuthForm(
     {
       email: '',
       fullname: '',
@@ -15,11 +15,6 @@ const Register = () => {
     registerNewUser
   );
   useApplyCSSClass('#root', ['h-full', 'md:bg-pale']);
-
-  const { isAuthenticated, error } = useAuth();
-  if (isAuthenticated) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <>
