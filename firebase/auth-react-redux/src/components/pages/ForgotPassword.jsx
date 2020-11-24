@@ -1,29 +1,13 @@
-import { useEffect } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import InputField from '../InputField';
 import { useApplyCSSClass, useAuth, useAuthForm } from '../../hooks';
-import { forgotPassword, clearAuthErrors } from '../../store/features/auth/authSlice';
+import { forgotPassword } from '../../store/features/auth/authSlice';
 
 const ForgotPassword = () => {
-  const history = useHistory();
-  const { authForm, handleChange } = useAuthForm({ email: '' });
+  const { authForm, handleChange, handleSubmit } = useAuthForm({ email: '' }, forgotPassword);
   useApplyCSSClass('#root', ['h-full', 'md:bg-pale']);
 
   const { isAuthenticated, error } = useAuth();
-  const dispatch = useDispatch();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(forgotPassword(authForm));
-    history.push('/');
-  };
-
-  useEffect(() => {
-    return () => {
-      dispatch(clearAuthErrors());
-    };
-  }, [dispatch]);
-
   if (isAuthenticated) {
     return <Redirect to="/" />;
   }

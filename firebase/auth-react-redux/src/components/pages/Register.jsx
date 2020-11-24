@@ -1,34 +1,22 @@
 import { Link, Redirect } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import InputField from '../InputField';
 import PasswordField from '../PasswordField';
 import { useApplyCSSClass, useAuth, useAuthForm } from '../../hooks';
-import { registerNewUser, clearAuthErrors } from '../../store/features/auth/authSlice';
-import { useEffect } from 'react';
+import { registerNewUser } from '../../store/features/auth/authSlice';
 
 const Register = () => {
-  const { authForm, handleChange } = useAuthForm({
-    email: '',
-    fullname: '',
-    location: '',
-    password: ''
-  });
+  const { authForm, handleChange, handleSubmit } = useAuthForm(
+    {
+      email: '',
+      fullname: '',
+      location: '',
+      password: ''
+    },
+    registerNewUser
+  );
   useApplyCSSClass('#root', ['h-full', 'md:bg-pale']);
 
   const { isAuthenticated, error } = useAuth();
-  const dispatch = useDispatch();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(registerNewUser(authForm));
-  };
-
-  useEffect(() => {
-    return () => {
-      dispatch(clearAuthErrors());
-    };
-  }, [dispatch]);
-
-  // check if there is a logged in user - if so redirect
   if (isAuthenticated) {
     return <Redirect to="/" />;
   }

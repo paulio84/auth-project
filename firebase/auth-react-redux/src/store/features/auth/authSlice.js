@@ -90,6 +90,7 @@ const authSlice = createSlice({
     [fetchUserProfile.fulfilled]: (state, action) => {
       const user = {
         ...state.user,
+        isAuthenticated: true,
         profile: { ...action.payload.userProfile, error: null }
       };
       state.user = user;
